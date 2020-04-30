@@ -62,7 +62,7 @@ class Gramatica2:
             vnterminales = []
             paso = True
             while (paso == True):
-                print("Ingrese el terminal a ingresar:")
+                print("Ingrese el no terminal a ingresar:")
                 terminal = input()
                 pos=0
                 correcto=False
@@ -93,7 +93,7 @@ class Gramatica2:
             vnterminalesn = []
             paso = True
             while (paso == True):
-                print("Ingrese el terminal a ingresar:")
+                print("Ingrese el no terminal a ingresar:")
                 terminal = input()
                 pos = 0
                 correcto = False
@@ -134,6 +134,7 @@ class Gramatica2:
             if(x==terminal):
                 siexiste=True
         if(siexiste==True):
+            print("No terminal inicial guardado con éxito!")
             return terminal
         else:
             print("El no terminal ingresado no existe en el listado original de no terminales")
@@ -207,3 +208,48 @@ class Gramatica2:
             if (respuesta == 'n' or respuesta == 'N'):
                 paso = False
         return veliminadas
+
+    def quitarrecursividad(self,producciones):
+        sitiene=False
+        vproducciones=[]
+        noterminalesrecursivos=[]
+        for produccion in producciones:
+            dividir=produccion.split(">")
+            izquierda=dividir[0].split(" ")
+            derecha=dividir[1].split(" ")
+            prima=izquierda[0]+"p"
+            yatiene=False
+            #Verificar si ya esta resuelta la recursividad
+            for y in noterminalesrecursivos:
+                yatiene = False
+                if(y==izquierda[0]):
+                    cadena=izquierda[0]+" > "
+                    n=0
+                    for x in derecha:
+                        if(n!=0):
+                            cadena=cadena+x+" "
+                        n=1
+                    cadena=cadena+prima
+                    vproducciones.append(cadena)
+                    yatiene=True
+
+            if(izquierda[0]==derecha[1]):
+                sitiene=True
+                noterminalesrecursivos.append(izquierda[0])
+                cadena=prima+" > "
+                n=0
+                for x in derecha:
+                    if(n>=2):
+                        cadena=cadena+x+" "
+                    n=n+1
+                cadena=cadena+prima
+                vproducciones.append(cadena)
+                cadena=prima+" > epsilon"
+                vproducciones.append(cadena)
+            elif(yatiene==False):
+                vproducciones.append(produccion)
+            #Quitar la recursividad
+        if(sitiene==False):
+            print("La gramática no tiene recursividad")
+            vproducciones.clear()
+        return vproducciones
