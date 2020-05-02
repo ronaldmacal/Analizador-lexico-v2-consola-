@@ -31,11 +31,11 @@ class automatapila:
         transiciones = []
         cadena = ""
         #Paso 3: crear transicion de ley (i,l',l';p,#)
-        cadena="i,l',l';p,#"
+        cadena="i,lambda,lambda;p,#"
         transiciones.append(cadena)
 
         #Paso 4: Crear transición con estado inicial S (p,l',l';q,S)
-        cadena="p,l',l';q,"+noterminalinicial+""
+        cadena="p,lambda,lambda;q,"+noterminalinicial+""
         transiciones.append(cadena)
 
         #Paso 5: Transiciones (q,l',1;q,2) -->1:Produccion lado izquierdo. 2: Transicion lado derecho
@@ -43,16 +43,16 @@ class automatapila:
             vector=pro.split(">")
             izquierdo=vector[0].strip(" ")
             derecho=vector[1].strip(" ")
-            cadena="q,l',"+izquierdo+";q,"+derecho
+            cadena="q,lambda,"+izquierdo+";q,"+derecho
             transiciones.append(cadena)
 
         #Paso 6: Transiciones (q,1,1;q,l') --> 1: Para cada alfabeto
         for ter in terminales:
-            cadena="q,"+ter+","+ter+";q,l'"
+            cadena="q,"+ter+","+ter+";q,lambda"
             transiciones.append(cadena)
 
         #Paso 7: Transicion del final
-        cadena="q,l',#;f,l'"
+        cadena="q,lambda,#;f,lambda"
         transiciones.append(cadena)
         vectorres.append(transiciones)
 
