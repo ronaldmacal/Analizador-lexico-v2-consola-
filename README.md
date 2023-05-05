@@ -1,4 +1,3 @@
-# Proyecto2_Lenguajes
-Proyecto 2 el cual es una complementación del proyecto 1.
-El proyecto 1 tenía un alcance que incluía Automatas finitos Deterministas y también gramaticas regulares.
-Ahora para completar ese proyecto se incluyen, automatas de pila y gramaticas tipo 2.
+# Analizador léxico v2
+Proyecto basado en Consola Python. 
+Analizador léxico para automatas finitos deterministas, automatas de pila, gramáticas regulares y gramáticas tipo 2.
